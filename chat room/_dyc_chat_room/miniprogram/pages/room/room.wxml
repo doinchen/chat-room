@@ -1,0 +1,144 @@
+<view class="container" wx:if="{{about}}">
+<view class="number">房间号：{{number}}</view>
+
+  <view class="head">
+
+    <view class="white" wx:if="{{stars[0]!=null}}">
+
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{stars[0].avartr}}' mode='widthFix'></image>
+      </view>
+
+      <view class="title">
+        <text class="nickName">{{stars[0].nickName}}</text>
+      </view>
+      
+    </view>
+
+    <view class="white" wx:if="{{stars[0]==null}}">
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{avartr}}' mode='widthFix'></image>
+      </view>
+
+
+      <view class="title">
+        <text class="nickName">{{nickName}}</text>
+      </view>
+    </view>
+
+
+  </view>
+  <view class="second">
+
+  <view class="head">
+    <view class="white" wx:if="{{stars[1]!=null}}">
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{stars[1].avartr}}' mode='widthFix'></image>
+      </view>
+
+
+
+      <view class="title">
+        <text class="nickName">{{stars[1].nickName}}</text>
+      </view>
+    </view>
+
+    <view class="white" wx:if="{{stars[1]==null}}">
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{avartr}}' mode='widthFix'></image>
+      </view>
+
+
+      <view class="title">
+        <text class="nickName">{{nickName}}</text>
+      </view>
+    </view>
+
+
+  </view>
+  <view class="head">
+    <view class="white" wx:if="{{stars[1]!=null}}">
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{stars[2].avartr}}' mode='widthFix'></image>
+      </view>
+
+
+
+      <view class="title">
+        <text class="nickName">{{stars[2].nickName}}</text>
+      </view>
+    </view>
+
+    <view class="white" wx:if="{{stars[1]==null}}">
+      <view class="Photo_frame">
+        <image class="avatar_user" src='{{avartr}}' mode='widthFix'></image>
+      </view>
+
+
+      <view class="title">
+        <text class="nickName">{{nickName}}</text>
+      </view>
+    </view>
+
+
+  </view>
+
+</view>
+  <button bindtap="say">房间聊天</button>
+  <button bindtap="sendnumber">发送房间号</button>
+  <button bindtap="quit">退出房间</button>
+</view>
+<view class="container"wx:if="{{!about}}">
+  <view>房间聊天</view>
+  <button bindtap="return">返回</button>
+  <view class="chatroom">
+    <scroll-view scroll-y="true" class="lit_body" id="scroll_view" scroll-into-view="{{toLast}}">
+      <view class="card" wx:for="{{star}}" wx:key="index">
+        <view class="left" wx:if="{{openid!=item._openid}}" id="item{{index}}">
+          <view class="left-card-head">
+            <view class="left-img">
+              <image class="avatar" src='{{item.avatarUrl}}' mode='widthFix'></image>
+            </view>
+            <view class="left-title">
+              <text class="nickName">{{item.nickName}}</text>
+            </view>
+          </view>
+          <view class="card-body">
+            <text class="left-text" user-select="{{item.copy}}"bindlongpress ='copy' data-copy='{{item.talkabout}}'>{{item.talkabout}}</text>
+          </view>
+
+        </view>
+        <view class="right" wx:if="{{openid==item._openid}}" id="item{{index}}">
+          <view class="right-card-head">
+            <view class="right-img">
+              <image class="avatar" src='{{item.avatarUrl}}' mode='widthFix'></image>
+            </view>
+            <view class="right-title">
+              <text class="nickName">{{item.nickName}}</text>
+            </view>
+
+          </view>
+          <view class="right-card-body">
+            <text class="right-text" user-select="{{item.copy}}"bindlongpress ='copy' data-copy='{{item.talkabout}}'>{{item.talkabout}}</text>
+          </view>
+
+        </view>
+
+      </view>
+
+    </scroll-view>
+    <view class="footer">
+      <view class="message-sender" wx:if="{{login}}">
+        <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userInfo">
+          请登录后参加聊天
+        </button>
+      </view>
+      <view class="message-sender" wx:if="{{!login}}">
+        <input class="message-sender-input" type="text-input" placeholder="请输入" bindinput="onTextInput" value="{{talkabout}}"></input>
+        <button class="send-btn" type="primary" bindtap="onSend">
+          <text>发送</text>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

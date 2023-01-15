@@ -1,0 +1,75 @@
+<view class="container">
+  <view class="head">
+    <image class="avatar_user" src='{{avatarUrl}}' mode='widthFix'></image>
+    <view class="title">
+      <text class="nickName">{{nickName}}</text>
+    </view>
+  </view>
+  <view class="floatBtn">
+    <button size="mini" type="primary" bindtap="login" wx:if="{{login}}">登录</button>
+    <button size="mini" type="primary" bindtap="exit" wx:else>登出</button>
+  </view>
+  <view class="nav">
+    <view class="room"wx:if="{{!searching}}">
+      <button type="primary" bindtap="search">搜索房间</button>
+      <button type="primary" bindtap="buildroom">创建房间</button>
+    </view>
+    <view class="join" wx:if="{{searching}}">
+    <button size="mini" type="primary" bindtap="off">取消</button>
+    <input type="text-input" placeholder="请输入" bindinput="onRoomInput" value=""></input>
+    <button type="primary" size="mini" bindtap="joinroom">加入</button>
+  </view>
+  </view>
+  <view class="world"><text>公屏聊天</text></view>
+  <view class="chatroom">
+    <scroll-view scroll-y="true" class="lit_body" id="scroll_view" scroll-into-view="{{toLast}}">
+      <view class="card" wx:for="{{stars}}" wx:key="index">
+        <view class="left" wx:if="{{openid!=item._openid}}" id="item{{index}}">
+          <view class="left-card-head">
+            <view class="left-img">
+              <image class="avatar" src='{{item.avatarUrl}}' mode='widthFix'></image>
+            </view>
+            <view class="left-title">
+              <text class="nickName">{{item.nickName}}</text>
+            </view>
+          </view>
+          <view class="card-body">
+            <text class="left-text" user-select="{{item.copy}}"bindlongpress ='copy' data-copy='{{item.talkabout}}'>{{item.talkabout}}</text>
+          </view>
+
+        </view>
+        <view class="right" wx:if="{{openid==item._openid}}" id="item{{index}}">
+          <view class="right-card-head">
+            <view class="right-img">
+              <image class="avatar" src='{{item.avatarUrl}}' mode='widthFix'></image>
+            </view>
+            <view class="right-title">
+              <text class="nickName">{{item.nickName}}</text>
+            </view>
+
+          </view>
+          <view class="right-card-body">
+            <text class="right-text" user-select="{{item.copy}}"bindlongpress ='copy' data-copy='{{item.talkabout}}'>{{item.talkabout}}</text>
+          </view>
+
+        </view>
+
+      </view>
+
+    </scroll-view>
+    <view class="footer">
+      <view class="message-sender" wx:if="{{login}}">
+        <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userInfo">
+          请登录后参加聊天
+        </button>
+      </view>
+      <view class="message-sender" wx:if="{{!login}}">
+        <input class="message-sender-input" type="text-input" placeholder="请输入" bindinput="onTextInput" value="{{talkabout}}"></input>
+        <button class="send-btn" type="primary" bindtap="onSend">
+          <text>发送</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+</view>

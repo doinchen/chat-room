@@ -1,0 +1,1 @@
+"D:\Program Files (x86)\Tencent\wechattool\cli.bat" cloud functions deploy --e cloud1-4g04mk9463ab1ed8 --n quickstartFunctions --r --project "D:\Users\USER\WeChatProjects\class" --report_first --report

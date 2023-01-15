@@ -1,0 +1,13 @@
+
+<view class="container">
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}" mode='widthFix'></image>
+  </button>
+
+  <view class="input">
+    <text>昵称</text>
+    <input bindinput="getName" type="nickname" class="weui-input" placeholder="请输入昵称" />
+  </view>
+  <button bindtap="upload">确定</button>
+
+</view>
